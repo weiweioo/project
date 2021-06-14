@@ -1,0 +1,28 @@
+body {
+    padding: 0;
+    margin: 0;
+    font-family: 'Noto Sans TC', sans-serif;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+#box {
+    width: 100%;
+    height: 900px;
+    background-color: #FAD689;
+}
+
+.container {
+    width: 1140px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title .logo {
+    /* margin: 0 auto; */
+    display: block;
+}

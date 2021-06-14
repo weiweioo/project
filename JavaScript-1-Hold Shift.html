@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Shift+左鍵在check list中連續選取的效果</title>
+    <link rel="stylesheet" href="JavaScript-1-Hold Shift.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- google字體 -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+</head>
+<body>
+    <div class="title">
+        <h3>周杰倫-歷年精選歌單</h3>
+        <div class="container">
+            <div class="row">
+                <div class="col-12 d-block d-md-flex col-md-8 align-items-center">
+                    <div class="img_jay"></div>
+                </div>
+                <div class="col-12 d-block d-md-flex col-md-4">
+                    <div class="list">
+                        <div class="item">
+                            <input type="checkbox">
+                            <p>可愛女人</p>
+                        </div>
+                        <div class="item">
+                            <input type="checkbox">
+                            <p>完美主義</p>
+                        </div>
+                        <div class="item">
+                            <input type="checkbox">
+                            <p>星晴</p>
+                        </div>
+                        <div class="item">
+                            <input type="checkbox">
+                            <p>娘子</p>
+                        </div>
+                        <div class="item">
+                            <input type="checkbox">
+                            <p>鬥牛</p>
+                        </div>
+                        <div class="item">
+                            <input type="checkbox">
+                            <p>黑色幽默</p>
+                        </div>
+                        <div class="item">
+                            <input type="checkbox">
+                            <p>伊斯坦堡</p>
+                        </div>
+                        <div class="item">
+                            <input type="checkbox">
+                            <p>印地安老斑鳩</p>
+                        </div>
+                        <div class="item">
+                            <input type="checkbox">
+                            <p>龍捲風</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Bootstrap'js -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    <!-- Vue'js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+    <script>
+
+        (function() {
+
+            const checkboxes = Array.from( document.querySelectorAll('.list input[type="checkbox"]')
+            );
+
+            let lastCheck = null;
+
+            function clickHandler(e) {
+                if (this.checked){
+                    if (e.shiftKey && lastCheck !== null) {
+                        let nowCheck = checkboxes.indexOf(this);
+                        checkboxes
+                            .slice(
+                                Math.min(nowCheck, lastCheck),
+                                Math.max(nowCheck, lastCheck)
+                            )
+                            .forEach(input => (input.checked = true));
+                    }
+                    lastCheck = checkboxes.indexOf(this);
+                } else {
+                    lastCheck = null;
+                }
+            }
+            checkboxes.forEach(input => {
+                input.addEventListener("click", clickHandler);
+            });
+        })();
+    
+    </script>
+</body>
+
+
+</html>

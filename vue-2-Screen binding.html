@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-畫面綁定</title>
+    <link rel="stylesheet" href="vue-2-Screen binding.css">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+        integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <!-- google字體 -->
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC&display=swap" rel="stylesheet">
+    <!-- fontawesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.2/css/all.min.css">
+</head>
+<body>
+    <div id="cartoon">
+        <div class="container">
+            <div class="title">
+                <!-- vue寫法 -->
+                <img src="./img/logo.png" width="50" alt="蠟筆小新">
+                <h5>{{ title }}</h5>
+            </div>
+            <div class="main">
+                <div class="main_img">
+                    <img :src="today.src">
+                </div>
+                <div class="main_text">
+                    <!-- 若不是第一天就出現 -->
+                    <!-- index != 0 -->
+                    <i class="fas fa-caret-left" v-if="index > 0" class="left" @click="changeIndex(-1)"></i>
+                    <a>
+                    </a>
+                    <div class="bg-warning text-white rounded px-3" script="transform:scale3d(1.5,1.5,1)">
+                        <!-- <span class="number">{{ index+1 }}</span> -->
+                        <span class="type">{{ today.type }}</span>
+                        <a class="name" :href="today.link">{{ today.title }}
+                        </a>
+                    </div>
+                    <!-- 若不是最後一天就出現 -->
+                    <!-- index != total - 1 -->
+                    <i class="fas fa-caret-right" v-if="index < total - 1" class="right" @click="changeIndex(1)"></i>
+                    <a>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+
+    <!-- Bootstrap'js -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"
+        integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js"
+        integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k"
+        crossorigin="anonymous"></script>
+    <!-- Vue'js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.10/vue.js"></script>
+    <script>
+        let data = {
+            src: './img/character-1.png',
+            title: '人物介紹',
+            index: 0,
+            menu: [
+                { type: '主角', title: '蠟筆小新', src: './img/character-1.png' },
+                { type: '家人', title: '野原廣治', src: './img/character-father.png' },
+                { type: '家人', title: '野原美冴', src: './img/character-mother.png' },
+                { type: '家人', title: '野原小葵', src: './img/character-sister.png' },
+                { type: '朋友', title: '風間  撤', src: './img/character-friend-1.png' },
+                { type: '朋友', title: '櫻田妮妮', src: './img/character-friend-2.png' },
+                { type: '朋友', title: '佐藤正男', src: './img/character-friend-3.png' },
+                { type: '朋友', title: '阿呆', src: './img/character-friend-4.png' },
+                { type: '夥伴', title: '動感超人', src: './img/character-friend-5.png' },
+                { type: '夥伴', title: '肥嘟嘟佐衛門', src: './img/character-friend-6.png' },
+            ]
+        };
+        let vm = new Vue({
+            el: '#cartoon',
+            data: data,
+            computed: {
+                today() { return this.menu[this.index]; },
+                total() { return this.menu.length; }
+            },
+            methods: {
+                changeIndex(change) {
+                    // let length = this.menu.length
+                    this.index = (this.index + change + this.total) % this.total;
+                }
+            }
+        });
+
+
+
+    </script>
+</body>
+
+</html>
